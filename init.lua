@@ -1,8 +1,8 @@
-package.path = vim.fn.expand("$XDG_CONFIG_HOME") .. "\\nvim\\?.lua;" .. package.path
+package.path = vim.fn.expand("$XDG_CONFIG_HOME") .. "/nvim/?.lua;" .. package.path
 
-vim.api.nvim_exec("language en_US", true)
+pcall(vim.api.nvim_exec, "language en_US", true)
 
-local lazypath = vim.fn.expand("$XDG_CONFIG_HOME") .. "\\nvim\\lazy\\lazy.nvim"
+local lazypath = vim.fn.expand("$XDG_CONFIG_HOME") .. "/nvim/lazy/lazy.nvim"
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -21,7 +21,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local lazy_options = {
-    root = vim.fn.expand("$XDG_CONFIG_HOME") .. "\\nvim\\plugins\\lazy\\",
+    root = vim.fn.expand("$XDG_CONFIG_HOME") .. "/nvim/plugins/lazy/",
     install = {
         missing = true,
         -- colorscheme = { "habamax" }
