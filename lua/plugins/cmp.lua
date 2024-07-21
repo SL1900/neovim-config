@@ -7,7 +7,8 @@ return {
             cmp.setup({
                 snippet = {
                     expand = function(args)
-                        vim.fn["vsnip#anonymous"](args.body)
+                        -- vim.fn["vsnip#anonymous"](args.body)
+                        require("luasnip").lsp_expand(args.body)
                     end
                 },
                 mapping = cmp.mapping.preset.insert({
@@ -19,7 +20,8 @@ return {
                 }),
                 sources = cmp.config.sources({
                     { name = "nvim_lsp" },
-                    { name = "vsnip" }
+                    -- { name = "vsnip" }
+                    { name = "luasnip" }
                 }, {
                     { name = "buffer" }
                 })
@@ -46,6 +48,7 @@ return {
     { "hrsh7th/cmp-buffer" },
     { "hrsh7th/cmp-path" },
     { "hrsh7th/cmp-cmdline" },
+    { "saadparwaiz1/cmp_luasnip"},
     { "hrsh7th/cmp-vsnip" },
     { "hrsh7th/vim-vsnip" },
 }
