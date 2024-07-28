@@ -1,0 +1,3 @@
+return {
+    "dbaileychess/vim-screeps"
+}
