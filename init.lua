@@ -102,6 +102,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.keymap.set("n", "<leader>f", function()
             vim.lsp.buf.format { async = true }
         end, opts)
+
+        require("lsp_signature").on_attach({
+            
+        },ev.buf)
     end
 })
 
