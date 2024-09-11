@@ -55,7 +55,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 --ToggleTerm
 -- vim.keymap.set("n", "<C-t>", ":execute v:count1 . \"ToggleTerm\"<CR>")
--- vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 
 --Trouble
 -- local trouble = require("trouble")
