@@ -15,7 +15,7 @@ return {
                     write = function ()
                         for _, win_id in ipairs(vim.api.nvim_list_wins()) do
                             local buf_id = vim.api.nvim_win_get_buf(win_id)
-                            if vim.bo[buf_id].buftype ~= '' then vim.api.nvim_win_close(win_id, true) end
+                            if vim.bo[buf_id].buftype ~= '' then pcall( vim.api.nvim_win_close, win_id, true ) end
                         end
                     end
                 }
