@@ -1,9 +1,27 @@
 return {
     {
         "nvim-telescope/telescope.nvim",
-        config = function () 
+        config = function ()
             require("telescope").setup({
-                pickers = { find_files = { hidden = true } },
+                pickers = {
+                    find_files = {
+                        hidden = true
+                    },
+                    buffers = {
+                        layout_strategy = "vertical",
+                        layout_config = {
+                            width = 0.75,
+                        },
+                        mappings = {
+                            i = {
+                                ["<c-d>"] = "delete_buffer",
+                            },
+                            n = {
+                                ["dd"] = "delete_buffer",
+                            },
+                        },
+                    },
+                },
                 extensions = {
                     file_browser = {
                         hijack_netrw = true,
