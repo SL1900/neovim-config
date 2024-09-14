@@ -3,6 +3,11 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 vim.keymap.set("x", "<leader>p", "\"_dP")
 
+if package.config:sub(1,1) == "\\" then
+    vim.keymap.set("n", "<leader>oe", ":!explorer .<CR><CR>", { desc = "[O]pen [E]xplorer in current working directory" })
+    vim.keymap.set("n", "<leader>ot", ":!wt -w 0 nt -d .<CR><CR>", { desc = "[O]pen Windows [T]erminal in current working directory" })
+end
+
 -- Telescope
 local builtin = require("telescope.builtin")
 if builtin then
