@@ -1,1 +1,1 @@
-setx XDG_CONFIG_HOME "$USERPROFILE\.config"
+setx XDG_CONFIG_HOME "$env:USERPROFILE\.config"
