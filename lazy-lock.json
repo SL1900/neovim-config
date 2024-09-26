@@ -17,6 +17,7 @@
   "messages.nvim": { "branch": "main", "commit": "24dbb56829d1ed2d8d878e9f5547478441838567" },
   "mini.nvim": { "branch": "main", "commit": "c333187fcc76d7e772dac32c2a440a949fe34be4" },
   "neo-tree.nvim": { "branch": "main", "commit": "6e20108c4a8128782f534f5fe90c757b44212ef6" },
+  "neoformat": { "branch": "master", "commit": "b3b38589b39038dc12c2f5a59a828ed43439363a" },
   "neogit": { "branch": "master", "commit": "bc0c609e3568a171e0549b449aa1b2b4b5b20e8c" },
   "neovim": { "branch": "main", "commit": "b6fe88c3282cf9f117a3e836d761c2d78d02f417" },
   "nui.nvim": { "branch": "main", "commit": "a3597dc88b53489d3fddbddbbd13787355253bb0" },
