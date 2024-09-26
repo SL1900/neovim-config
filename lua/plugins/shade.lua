@@ -1,5 +1,5 @@
 return {
-    "valentino-sm//shade.nvim",
+    "valentino-sm/shade.nvim",
     config = function ()
         require("shade").setup({
             overlay_opacity = 50,
