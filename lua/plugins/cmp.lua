@@ -1,6 +1,9 @@
 return {
     {
         "hrsh7th/nvim-cmp",
+        dependencies = {
+            "onsails/lspkind-nvim",
+        },
         config = function()
             local cmp = require("cmp")
 
@@ -41,6 +44,21 @@ return {
                 }, {
                     { name = "cmdline" }
                 })
+            })
+
+            local lspkind = require("lspkind")
+            cmp.setup({
+                formatting = {
+                    format = lspkind.cmp_format({
+                        mode = "symbol",
+                        maxwidth = {
+                            menu = 50,
+                            abbr = 50,
+                        },
+                        ellipsis_char = "...",
+                        show_labelDetails = true,
+                    })
+                }
             })
         end
     },
