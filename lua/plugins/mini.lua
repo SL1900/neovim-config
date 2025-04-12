@@ -22,5 +22,6 @@ return {
             }
         })
         require("mini.starter").setup()
+        vim.opt.sessionoptions:remove('blank')
     end
 }
