@@ -39,6 +39,8 @@ capabilities.textDocument.foldingRange = {
     dynamicRegistration = false,
     lineFoldingOnly = true
 }
+
+require("lspconfig").glsl_analyzer.setup({})
 for _, server in pairs(lsp_servers) do
     if server == "lua_ls" then
         require("lspconfig")[server].setup({
