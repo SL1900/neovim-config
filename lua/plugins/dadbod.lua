@@ -25,5 +25,11 @@ return {
                 vim.schedule(db_completion)
             end
         })
+
+        vim.keymap.set("n", "<leader>odb", function ()
+            vim.cmd("tabnew")
+            vim.cmd(":DBUI")
+        end,
+        { desc="[O]pen [DB] UI" })
     end
 }
