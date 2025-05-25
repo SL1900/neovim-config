@@ -72,3 +72,6 @@ vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 -- vim.keymap.set("n", "<leader>xq", function() trouble.toggle("quickfix") end, { desc = "Toggle [Q]uickfix list" })
 -- vim.keymap.set("n", "<leader>xl", function() trouble.toggle("loclist") end, { desc = "Toggle [L]oc list" })
 --
+
+vim.keymap.set("n", "<leader>to", ":tabnew<CR>", {desc="[T]ab [O]pen"})
+vim.keymap.set("n", "<leader>tc", ":tabclose<CR>", {desc="[T]ab [C]lose"})
