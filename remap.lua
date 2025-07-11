@@ -31,14 +31,7 @@ if builtin then
     vim.keymap.set("n", "<leader>bc", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", {noremap=true})
     vim.keymap.set("n", "<leader>fb", ":Telescope file_browser path=. select_buffer=true<CR>", {noremap=true})
     vim.keymap.set("n", "<leader>bb", builtin.buffers, { noremap = true })
-    vim.keymap.set("n", "<leader>/", function()
-            builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-                winblend = 10,
-                previewer = true
-            }))
-        end,
-        { desc = "[/] Fuzzily search in curent buffer" }
-    )
+    vim.keymap.set("n", "<leader>/", builtin.current_buffer_fuzzy_find, { desc = "[/] Fuzzily search in curent buffer" })
     vim.keymap.set("n", "<leader>s/", function()
             builtin.live_grep({
                 grep_open_files = true,

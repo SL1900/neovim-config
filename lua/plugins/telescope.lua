@@ -21,7 +21,19 @@ return {
                             },
                         },
                     },
-                },
+                    live_grep = {
+                        layout_strategy = "vertical",
+                        layout_config = {
+                            width = 0.75,
+                        },
+                    },
+                    current_buffer_fuzzy_find = {
+                        layout_strategy = "horizontal",
+                        layout_config = {
+                            width = 0.75,
+                        },
+                    },
+               },
                 extensions = {
                     file_browser = {
                         hijack_netrw = true,
