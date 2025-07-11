@@ -21,6 +21,37 @@ return {
                 }
             }
         })
+        vim.keymap.set("n", "<leader>ws", function ()
+            vim.ui.input({ prompt = "Enter session name: " }, function (input)
+                if input and input ~= "" then
+                    require("mini.sessions").write(input)
+                else
+                    print("Session name is required.")
+                end
+            end)
+        end, { desc = "[w]rite [s]ession with custom name" })
+        vim.keymap.set("n", "<leader>os", function ()
+            local sessions = require("mini.sessions").detected
+            local list = {}
+            for k,_ in pairs(sessions) do list[#list + 1] = k end
+
+            vim.ui.select(list, { prompt = "Select session to open" }, function (choice)
+                if choice and choice ~= "" then require("mini.sessions").read(choice)
+                else print("Session was not selected")
+                end
+            end)
+        end)
+        vim.keymap.set("n", "<leader>ds", function ()
+            local sessions = require("mini.sessions").detected
+            local list = {}
+            for k,_ in pairs(sessions) do list[#list + 1] = k end
+
+            vim.ui.select(list, { prompt = "Select session to delete" }, function (choice)
+                if choice and choice ~= "" then require("mini.sessions").delete(choice)
+                else print("Session was not selected")
+                end
+            end)
+        end)
         require("mini.starter").setup()
         vim.opt.sessionoptions:remove('blank')
     end
