@@ -28,65 +28,79 @@ local lazy_options = {
     }
 }
 
-require("options")
 require("lazy").setup("plugins", lazy_options)
+require("options")
 require("remap")
 
 -- LSP
-local lsp_servers = require("mason-lspconfig").get_installed_servers()
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-capabilities.textDocument.foldingRange = {
-    dynamicRegistration = false,
-    lineFoldingOnly = true
-}
-
-require("lspconfig").glsl_analyzer.setup({})
-for _, server in pairs(lsp_servers) do
-    if server == "lua_ls" then
-        require("lspconfig")[server].setup({
-            capabilities = capabilities,
-            settings = {
-                Lua = { diagnostics = { globals = { "vim" } } }
-            }
-        })
-    elseif server == "svelte" then
-        local dyn_cap = vim.lsp.protocol.make_client_capabilities()
-        dyn_cap.workspace.didChangeWatchedFiles.dynamicRegistration = true
-        dyn_cap.textDocument.foldingRange = {
-            dynamicRegistration = false,
-            lineFoldingOnly = true
-        }
-
-        require("lspconfig")[server].setup({
-            capabilities = dyn_cap,
-            on_attach = function(client)
-                vim.api.nvim_create_autocmd("BufWritePost", {
-                    pattern = { "*.js", "*.ts" },
-                    callback = function(ctx)
-                        client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
-                    end
-                })
-            end,
-            settings = {
-                svelte = { plugin = { svelte = { compilerWarnings = {
-                    ["a11y-no-onchange"] = "ignore",
-                    ["a11y-aria-attributes"] = "ignore",
-                    ["a11y-no-static-element-interactions"] = "ignore",
-                    ["a11y-click-events-have-key-events"] = "ignore",
-                }}}}
-            }
-        })
-    else
-        require("lspconfig")[server].setup({ capabilities = capabilities })
-    end
-end
+-- local lsp_servers = require("mason-lspconfig").get_installed_servers()
+-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
+-- capabilities.textDocument.foldingRange = {
+--     dynamicRegistration = false,
+--     lineFoldingOnly = true
+-- }
+--
+-- require("lspconfig").glsl_analyzer.setup({})
+-- for _, server in pairs(lsp_servers) do
+--     if server == "lua_ls" then
+--         require("lspconfig")[server].setup({
+--             capabilities = capabilities,
+--             settings = {
+--                 Lua = {
+--                     runtime = {
+--                         version = "LuaJIT",
+--                     },
+--                     diagnostics = {
+--                         globals = { "vim" }
+--                     }
+--                 }
+--             }
+--         })
+--         vim.lsp.enable("lua_ls")
+--     elseif server == "svelte" then
+--         local dyn_cap = vim.lsp.protocol.make_client_capabilities()
+--         dyn_cap.workspace.didChangeWatchedFiles.dynamicRegistration = true
+--         dyn_cap.textDocument.foldingRange = {
+--             dynamicRegistration = false,
+--             lineFoldingOnly = true
+--         }
+--
+--         require("lspconfig")[server].setup({
+--             capabilities = dyn_cap,
+--             on_attach = function(client)
+--                 vim.api.nvim_create_autocmd("BufWritePost", {
+--                     pattern = { "*.js", "*.ts" },
+--                     callback = function(ctx)
+--                         client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
+--                     end
+--                 })
+--             end,
+--             settings = {
+--                 svelte = {
+--                     plugin = {
+--                         svelte = {
+--                             compilerWarnings = {
+--                                 ["a11y-no-onchange"] = "ignore",
+--                                 ["a11y-aria-attributes"] = "ignore",
+--                                 ["a11y-no-static-element-interactions"] = "ignore",
+--                                 ["a11y-click-events-have-key-events"] = "ignore",
+--                             }
+--                         }
+--                     }
+--                 }
+--             }
+--         })
+--     else
+--         require("lspconfig")[server].setup({ capabilities = capabilities })
+--     end
+-- end
 
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("LspConfig", {}),
     callback = function(ev)
         vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
-        local opts = {  buffer = ev.buf }
+        local opts = { buffer = ev.buf }
         vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
         vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
@@ -105,15 +119,22 @@ vim.api.nvim_create_autocmd("LspAttach", {
             vim.lsp.buf.format { async = true }
         end, opts)
 
-        require("lsp_signature").on_attach({
-            
-        },ev.buf)
+        -- require("lsp_signature").on_attach({
+        --
+        -- }, ev.buf)
     end
 })
 
 --Color
-local color = nil
+-- local color = nil
 -- vim.cmd.colorscheme(color or "rose-pine")
 -- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+--
 
+vim.diagnostic.config({
+    float = {
+        source = "always",
+        border = "rounded",
+    },
+})
