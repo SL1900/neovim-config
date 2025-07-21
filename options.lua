@@ -8,7 +8,7 @@ vim.opt.cursorline = true
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
-vim.o.statuscolumn = "%l %=%{v:relnum?v:lnum:v:lnum} "
+vim.o.statuscolumn = "%l %=%{v:relnum?v:lnum:v:lnum} %s"
 
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
