@@ -79,6 +79,13 @@ return {
     {
         "debugloop/telescope-undo.nvim",
         dependencies = { "nvim-lua/plenary.nvim" },
+        keys = {
+            {
+                "<leader>u",
+                "<cmd>Telescope undo<cr>",
+                desc = "[u]ndo history"
+            }
+        },
         opts = {
             extensions = {
                 undo = {}
