@@ -45,6 +45,17 @@ if builtin then
         end,
         { desc = "[S]earch [N]eovim files" }
     )
+
+    vim.api.nvim_create_autocmd("FileType", {
+        pattern = {"markdown"},
+        callback = function ()
+            vim.schedule(function ()
+                vim.keymap.set("n", "gd", function ()
+                    require("telescope.builtin").grep_string({search=vim.call("expand", "<cword>")})
+                end, { desc = "Grep search word under cursor"})
+            end)
+        end
+    })
 end
 
 --LSP
