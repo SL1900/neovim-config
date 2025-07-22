@@ -4,7 +4,14 @@ return {
         build = ":TSUpdate",
         config = function()
             vim.cmd("TSUpdate")
-            require("nvim-treesitter.install").compilers = { "zig", "g++", "gcc", "cc", "cl", "clang" }
+            require("nvim-treesitter.install").compilers = {
+                "zig",
+                "gcc",
+                "cc",
+                "cl",
+                "clang",
+                "g++",
+            }
             require("nvim-treesitter.configs").setup({
                 highlight = { enable = true },
                 ensure_installed = {
