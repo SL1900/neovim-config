@@ -1,3 +1,9 @@
+if vim.fn.expand("$XDG_CONFIG_HOME") == "$XDG_CONFIG_HOME" then
+    print("[XDG_CONFIG_HOME] environment variable not set, please set this environment variable for configuration to work")
+    print("press any key to close neovim")
+    vim.fn.getchar()
+    os.exit(1)
+end
 package.path = vim.fn.expand("$XDG_CONFIG_HOME") .. "/nvim/?.lua;" .. package.path
 
 pcall(vim.api.nvim_exec, "language en_US", true)
