@@ -19,7 +19,13 @@ return {
                 }
             })
             -- vim.cmd("colorscheme rose-pine-moon")
-            vim.cmd.colorscheme("rose-pine")
+            -- vim.cmd.colorscheme("rose-pine")
         end
     },
+    {
+        "folke/tokyonight.nvim",
+        config = function ()
+            vim.cmd("colorscheme tokyonight-night")
+        end
+    }
 }
