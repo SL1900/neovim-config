@@ -7,6 +7,11 @@ return {
             vim.lsp.config("lua_ls", {
                 settings = {
                     Lua = {
+                        workspace = {
+                            library = {
+                                "${3rd}/luv/library"
+                            }
+                        },
                         diagnostics = {
                             globals = { "vim" }
                         }

@@ -6,7 +6,7 @@ if vim.fn.expand("$XDG_CONFIG_HOME") == "$XDG_CONFIG_HOME" then
 end
 package.path = vim.fn.expand("$XDG_CONFIG_HOME") .. "/nvim/?.lua;" .. package.path
 
-pcall(vim.api.nvim_exec, "language en_US", true)
+pcall(vim.api.nvim_exec2, "language en_US", true)
 
 local lazypath = vim.fn.expand("$XDG_CONFIG_HOME") .. "/nvim/lazy/lazy.nvim"
 
@@ -14,7 +14,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 --Insure lazy.nvim is installed
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
     vim.fn.system({
         "git",
         "clone",
@@ -140,7 +140,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 vim.diagnostic.config({
     float = {
-        source = "always",
+        source = true,
         border = "rounded",
     },
 })
