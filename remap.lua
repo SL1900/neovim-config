@@ -3,16 +3,17 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 vim.keymap.set("x", "<leader>p", "\"_dP")
 
-if package.config:sub(1,1) == "\\" then
+if package.config:sub(1, 1) == "\\" then
     vim.keymap.set("n", "<leader>oe", ":!explorer .<CR><CR>", { desc = "[O]pen [E]xplorer in current working directory" })
-    vim.keymap.set("n", "<leader>ot", ":!wt -w 0 nt -d .<CR><CR>", { desc = "[O]pen Windows [T]erminal in current working directory" })
-    vim.keymap.set("n", "<leader>oce", function ()
+    vim.keymap.set("n", "<leader>ot", ":!wt -w 0 nt -d .<CR><CR>",
+        { desc = "[O]pen Windows [T]erminal in current working directory" })
+    vim.keymap.set("n", "<leader>oce", function()
         local path = vim.api.nvim_buf_get_name(0)
         local dir = path:sub(1, path:find('\\[^\\]*$'))
         -- vim.cmd(":!echo " .. "(path:sub(1, path:find('\\[^\\]*$')))" .. "<CR><CR>")
         -- print("Check "..dir)
         os.execute("explorer " .. dir)
-    end, { desc = "[O]pen [C]urrent buffer [Explorer]"})
+    end, { desc = "[O]pen [C]urrent buffer [Explorer]" })
 end
 
 -- Telescope
@@ -28,8 +29,8 @@ if builtin then
     vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
     vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
     vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = "[S]earch Recent Files ('.' for repeat)" })
-    vim.keymap.set("n", "<leader>bc", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", {noremap=true})
-    vim.keymap.set("n", "<leader>fb", ":Telescope file_browser path=. select_buffer=true<CR>", {noremap=true})
+    vim.keymap.set("n", "<leader>bc", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", { noremap = true })
+    vim.keymap.set("n", "<leader>fb", ":Telescope file_browser path=. select_buffer=true<CR>", { noremap = true })
     vim.keymap.set("n", "<leader>bb", builtin.buffers, { noremap = true })
     vim.keymap.set("n", "<leader>/", builtin.current_buffer_fuzzy_find, { desc = "[/] Fuzzily search in curent buffer" })
     vim.keymap.set("n", "<leader>s/", function()
@@ -47,12 +48,12 @@ if builtin then
     )
 
     vim.api.nvim_create_autocmd("FileType", {
-        pattern = {"markdown"},
-        callback = function ()
-            vim.schedule(function ()
-                vim.keymap.set("n", "gd", function ()
-                    require("telescope.builtin").grep_string({search=vim.call("expand", "<cword>")})
-                end, { desc = "Grep search word under cursor"})
+        pattern = { "markdown" },
+        callback = function()
+            vim.schedule(function()
+                vim.keymap.set("n", "gd", function()
+                    require("telescope.builtin").grep_string({ search = vim.call("expand", "<cword>") })
+                end, { desc = "Grep search word under cursor" })
             end)
         end
     })
@@ -60,10 +61,10 @@ end
 
 --LSP
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
-vim.keymap.set("n", "[d", function ()
+vim.keymap.set("n", "[d", function()
     vim.diagnostic.jump({ count = -1, float = true })
 end)
-vim.keymap.set("n", "]d", function ()
+vim.keymap.set("n", "]d", function()
     vim.diagnostic.jump({ count = 1, float = true })
 end)
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
