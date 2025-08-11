@@ -125,4 +125,10 @@ return {
             vim.keymap.set("n", "<leader>fg", ":lua require(\"telescope\").extensions.live_grep_args.live_grep_args()<CR>")
         end
     },
+    {
+        "fdschmidt93/telescope-egrepify.nvim",
+        config = function ()
+            require("telescope").load_extension("egrepify")
+        end
+    }
 }
