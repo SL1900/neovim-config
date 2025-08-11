@@ -6,5 +6,5 @@ return {
     config = function ()
         require("luasnip.loaders.from_vscode").lazy_load()
     end,
-    build = "make_install_jsregexp"
+    build = "make install_jsregexp"
 }
