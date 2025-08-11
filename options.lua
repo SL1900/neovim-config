@@ -51,3 +51,5 @@ vim.opt.hlsearch = false
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 vim.opt.title=true
+
+vim.o.winborder = "rounded"
