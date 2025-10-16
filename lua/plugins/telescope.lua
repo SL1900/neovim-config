@@ -2,6 +2,7 @@ return {
     {
         "nvim-telescope/telescope.nvim",
         config = function()
+            local actions = require("telescope.actions")
             require("telescope").setup({
                 pickers = {
                     find_files = {
@@ -25,6 +26,11 @@ return {
                         layout_strategy = "vertical",
                         layout_config = {
                             width = 0.75,
+                        },
+                        mappings = {
+                            i = {
+                                ["<C-q>"] = actions.smart_send_to_loclist + actions.open_loclist
+                            }
                         },
                     },
                     current_buffer_fuzzy_find = {
