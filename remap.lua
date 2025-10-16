@@ -91,13 +91,14 @@ vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 
 vim.keymap.set("n", "<leader>to", ":tabnew<CR>", { desc = "[T]ab [O]pen" })
 vim.keymap.set("n", "<leader>tc", ":tabclose<CR>", { desc = "[T]ab [C]lose" })
+
+local qf_group = vim.api.nvim_create_augroup("quickfix_autocommands", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "qf" },
     callback = function()
-        vim.schedule(function()
-            vim.keymap.set("n", "q", ":q<cr>", { desc = "Close current QuickFix buffer" })
-            vim.keymap.set("n", "<Escape>", ":q<cr>", { desc = "Close current QuickFix buffer" })
-            vim.keymap.set("n", "<leader><CR>", "<C-w><Enter><C-w>L", { desc = "Open quick fix element in vertical split" })
-        end)
-    end
+        vim.api.nvim_buf_set_keymap(0, "n", "q", ":q<cr>", { desc = "Close current QuickFix buffer" })
+        vim.api.nvim_buf_set_keymap(0, "n", "<Escape>", ":q<cr>", { desc = "Close current QuickFix buffer" })
+        vim.api.nvim_buf_set_keymap(0, "n", "<leader><CR>", "<C-w><Enter><C-w>L", { desc = "Open quick fix element in vertical split" })
+    end,
+    group = qf_group
 })
