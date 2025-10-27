@@ -116,6 +116,10 @@ return {
             require("telescope").setup({
                 extensions = {
                     live_grep_args = {
+                        layout_strategy = "vertical",
+                        layout_config = {
+                            width = 0.75,
+                        },
                         auto_quoting = true,
                         mappings = {
                             i = {
