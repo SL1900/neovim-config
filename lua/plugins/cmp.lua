@@ -50,13 +50,17 @@ return {
             cmp.setup({
                 formatting = {
                     format = lspkind.cmp_format({
-                        mode = "symbol",
+                        mode = "symbol_text",
                         maxwidth = {
                             menu = 50,
                             abbr = 50,
                         },
                         ellipsis_char = "...",
                         show_labelDetails = true,
+                        before = function (entry, vim_item)
+                            vim_item = require("tailwindcss-colorizer-cmp").formatter(entry, vim_item)
+                            return vim_item
+                        end
                     })
                 }
             })
