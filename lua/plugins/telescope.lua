@@ -6,7 +6,8 @@ return {
             require("telescope").setup({
                 pickers = {
                     find_files = {
-                        hidden = true
+                        hidden = true,
+                        sorter = require("telescope.sorters").get_fuzzy_file(),
                     },
                     buffers = {
                         layout_strategy = "vertical",
@@ -66,7 +67,7 @@ return {
                     fuzzy = true,
                     override_generic_sorter = true,
                     override_file_sorter = true,
-                    case_mode = "smart_case",
+                    case_mode = "ignore_case",
                 },
             }
         },
