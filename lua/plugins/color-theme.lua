@@ -24,8 +24,43 @@ return {
     },
     {
         "folke/tokyonight.nvim",
-        config = function ()
-            vim.cmd("colorscheme tokyonight-night")
+        config = function()
+            -- vim.cmd("colorscheme tokyonight-night")
         end
-    }
+    },
+    {
+        "rebelot/kanagawa.nvim"
+    },
+    {
+        'projekt0n/github-nvim-theme', name = 'github-theme',
+    },
+    {
+        "sainnhe/gruvbox-material",
+    },
+    {
+        "navarasu/onedark.nvim",
+        priority = 1000,
+    },
+    {
+        "EdenEast/nightfox.nvim",
+        config = function()
+            require("nightfox").setup({})
+        end,
+    },
+    {
+        "eldritch-theme/eldritch.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {},
+    },
+    {
+        "ellisonleao/gruvbox.nvim",
+        priority = 1000,
+        config = true,
+    },
+    {
+        "ricardoraposo/nightwolf.nvim",
+        priority = 1000,
+        opts = {},
+    },
 }
