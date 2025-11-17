@@ -102,3 +102,29 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
     group = qf_group
 })
+
+function IsLocListOpen()
+    for _, wininfo in ipairs(vim.fn.getwininfo()) do
+        if wininfo.loclist == true and wininfo.tabnr == vim.fn.tabpagenr() then
+            return true
+        end
+    end
+    return false
+end
+
+function AddLocListEntry()
+    local new_entry = {
+        filename = vim.fn.expand("%:p"),
+        lnum = vim.fn.line("."),
+        col = vim.fn.col("."),
+        text = vim.api.nvim_get_current_line(),
+        type = "I",
+    }
+    vim.fn.setloclist(0, {new_entry}, "a")
+    if not IsLocListOpen() then
+        vim.cmd("lopen")
+        vim.cmd.wincmd("p")
+    end
+end
+
+vim.keymap.set("n", "<leader>la", AddLocListEntry, { desc = "[L]ocation list [a]ppend current line" })
