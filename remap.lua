@@ -98,7 +98,8 @@ vim.api.nvim_create_autocmd("FileType", {
     callback = function()
         vim.api.nvim_buf_set_keymap(0, "n", "q", ":q<cr>", { desc = "Close current QuickFix buffer" })
         vim.api.nvim_buf_set_keymap(0, "n", "<Escape>", ":q<cr>", { desc = "Close current QuickFix buffer" })
-        vim.api.nvim_buf_set_keymap(0, "n", "<leader><CR>", "<C-w><Enter><C-w>L", { desc = "Open quick fix element in vertical split" })
+        vim.api.nvim_buf_set_keymap(0, "n", "<leader><CR>", "<C-w><Enter><C-w>L",
+            { desc = "Open quick fix element in vertical split" })
     end,
     group = qf_group
 })
@@ -120,7 +121,7 @@ function AddLocListEntry()
         text = vim.api.nvim_get_current_line(),
         type = "I",
     }
-    vim.fn.setloclist(0, {new_entry}, "a")
+    vim.fn.setloclist(0, { new_entry }, "a")
     if not IsLocListOpen() then
         vim.cmd("lopen")
         vim.cmd.wincmd("p")
