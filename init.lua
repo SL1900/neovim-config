@@ -145,5 +145,5 @@ vim.diagnostic.config({
     },
 })
 
-local highlight_script_path = debug.getinfo(1, "S").source:match("@?(.*[\\/])")
-vim.cmd("source " .. highlight_script_path .. "vim/highlight/highlight.vim")
+local highlight = require("highlight")
+highlight.setup()
