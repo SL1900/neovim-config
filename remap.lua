@@ -10,8 +10,6 @@ if package.config:sub(1, 1) == "\\" then
     vim.keymap.set("n", "<leader>oce", function()
         local path = vim.api.nvim_buf_get_name(0)
         local dir = path:sub(1, path:find('\\[^\\]*$'))
-        -- vim.cmd(":!echo " .. "(path:sub(1, path:find('\\[^\\]*$')))" .. "<CR><CR>")
-        -- print("Check "..dir)
         os.execute("explorer " .. dir)
     end, { desc = "[O]pen [C]urrent buffer [Explorer]" })
 end
@@ -78,16 +76,8 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     end
 })
 
---ToggleTerm
--- vim.keymap.set("n", "<C-t>", ":execute v:count1 . \"ToggleTerm\"<CR>")
+-- Esc to exit to normal mode in terminal
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
-
---Trouble
--- local trouble = require("trouble")
--- vim.keymap.set("n", "<leader>xx", function() trouble.toggle("workspace_diagnostics") end, { desc = "Toggle Trouble" })
--- vim.keymap.set("n", "<leader>xq", function() trouble.toggle("quickfix") end, { desc = "Toggle [Q]uickfix list" })
--- vim.keymap.set("n", "<leader>xl", function() trouble.toggle("loclist") end, { desc = "Toggle [L]oc list" })
---
 
 vim.keymap.set("n", "<leader>to", ":tabnew<CR>", { desc = "[T]ab [O]pen" })
 vim.keymap.set("n", "<leader>tc", ":tabclose<CR>", { desc = "[T]ab [C]lose" })
@@ -104,7 +94,7 @@ vim.api.nvim_create_autocmd("FileType", {
     group = qf_group
 })
 
-function IsLocListOpen()
+function IsLocationListOpen()
     for _, wininfo in ipairs(vim.fn.getwininfo()) do
         if wininfo.loclist == true and wininfo.tabnr == vim.fn.tabpagenr() then
             return true
@@ -113,7 +103,7 @@ function IsLocListOpen()
     return false
 end
 
-function AddLocListEntry()
+function AddLocationListEntry()
     local new_entry = {
         filename = vim.fn.expand("%:p"),
         lnum = vim.fn.line("."),
@@ -122,10 +112,10 @@ function AddLocListEntry()
         type = "I",
     }
     vim.fn.setloclist(0, { new_entry }, "a")
-    if not IsLocListOpen() then
+    if not IsLocationListOpen() then
         vim.cmd("lopen")
         vim.cmd.wincmd("p")
     end
 end
 
-vim.keymap.set("n", "<leader>la", AddLocListEntry, { desc = "[L]ocation list [a]ppend current line" })
+vim.keymap.set("n", "<leader>la", AddLocationListEntry, { desc = "[L]ocation list [a]ppend current line" })
