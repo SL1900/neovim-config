@@ -119,3 +119,29 @@ function AddLocationListEntry()
 end
 
 vim.keymap.set("n", "<leader>la", AddLocationListEntry, { desc = "[L]ocation list [a]ppend current line" })
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "help",
+    callback = function()
+        vim.schedule(function()
+            vim.keymap.set("n", "<C-]>", function()
+                local word = vim.fn.expand('<cWORD>')
+
+                -- Extract tag from |tag| format used in help files
+                local tag = word:match('|([^|]+)|') or word
+
+                if tag then
+                    -- Remove any trailing special characters
+                    tag = tag:gsub('[^%w%-_*]', '')
+
+                    if tag ~= '' then
+                        local success = pcall(vim.cmd, 'tag ' .. tag)
+                        if not success then
+                            -- Try fuzzy search
+                            vim.cmd('tag /' .. tag)
+                        end
+                    end
+                end
+            end)
+        end)
+    end
+})
