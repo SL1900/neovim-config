@@ -53,3 +53,5 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.opt.title=true
 
 vim.o.winborder = "rounded"
+
+vim.opt.shada = "!,'300,<50,s10,h"
