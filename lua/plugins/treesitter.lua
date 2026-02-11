@@ -1,9 +1,10 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
-        build = ":TSUpdate",
+        -- build = ":TSUpdate",
+        event = { "BufReadPost", "BufNewFile" },
         config = function()
-            vim.cmd("TSUpdate")
+            -- vim.cmd("TSUpdate")
             require("nvim-treesitter.install").compilers = {
                 "zig",
                 "gcc",
