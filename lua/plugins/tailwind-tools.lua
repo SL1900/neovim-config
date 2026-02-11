@@ -1,5 +1,6 @@
 return {
-    "luckasRanarison/tailwind-tools.nvim",
+    -- "luckasRanarison/tailwind-tools.nvim",
+    "lg-epitech/tailwind-tools.nvim",
     name = "tailwind-tools",
     build = ":UpdateRemotePlugins",
     opts = {},
