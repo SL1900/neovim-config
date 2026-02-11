@@ -4,7 +4,10 @@ return {
         "rafamadriz/friendly-snippets"
     },
     config = function ()
+        require("luasnip").config.setup({
+            enable_autosnippets = false,
+        })
         require("luasnip.loaders.from_vscode").lazy_load()
     end,
-    build = "make install_jsregexp"
+    -- build = "make install_jsregexp"
 }
