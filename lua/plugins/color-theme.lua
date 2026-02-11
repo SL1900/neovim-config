@@ -42,12 +42,6 @@ return {
         priority = 1000,
     },
     {
-        "EdenEast/nightfox.nvim",
-        config = function()
-            require("nightfox").setup({})
-        end,
-    },
-    {
         "eldritch-theme/eldritch.nvim",
         lazy = false,
         priority = 1000,
