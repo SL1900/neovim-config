@@ -148,6 +148,9 @@ vim.diagnostic.config({
 local highlight = require("highlight")
 highlight.setup()
 
+local quickCommand = require("quick-command")
+quickCommand.setup()
+
 vim.api.nvim_create_autocmd({ 'VimLeavePre' }, {
     group = vim.api.nvim_create_augroup('fuck_shada_temp', { clear = true }),
     pattern = { '*' },
