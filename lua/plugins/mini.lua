@@ -54,5 +54,7 @@ return {
         end)
         require("mini.starter").setup()
         vim.opt.sessionoptions:remove('blank')
+
+        require("mini.align").setup()
     end
 }
