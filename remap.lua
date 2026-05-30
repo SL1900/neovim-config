@@ -32,6 +32,7 @@ if builtin then
     vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
     vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
     vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
+    vim.keymap.set("n", "<leader>pr", builtin.pickers, { desc = "[P]ickers [R]esume" })
     vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = "[S]earch Recent Files ('.' for repeat)" })
     vim.keymap.set("n", "<leader>bc", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", { noremap = true })
     vim.keymap.set("n", "<leader>fb", ":Telescope file_browser path=. select_buffer=true<CR>", { noremap = true })
@@ -87,6 +88,8 @@ vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 
 vim.keymap.set("n", "<leader>to", ":tabnew<CR>", { desc = "[T]ab [O]pen" })
 vim.keymap.set("n", "<leader>tc", ":tabclose<CR>", { desc = "[T]ab [C]lose" })
+vim.keymap.set("n", "<leader>tn", ":tabnext<CR>", { desc = "[T]ab [N]ext" })
+vim.keymap.set("n", "<leader>tp", ":tabprevious<CR>", { desc = "[T]ab [P]revious" })
 
 local qf_group = vim.api.nvim_create_augroup("quickfix_autocommands", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
@@ -151,3 +154,10 @@ vim.api.nvim_create_autocmd("FileType", {
         end)
     end
 })
+
+vim.keymap.set("n", "<C-w><C-j>", function ()
+    local window_picker = require("window-picker")
+    local win_id = window_picker.pick_window()
+    if not win_id then return end
+    vim.api.nvim_set_current_win(win_id)
+end)
