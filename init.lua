@@ -151,6 +151,9 @@ highlight.setup()
 local quickCommand = require("quick-command/quick-command")
 quickCommand.setup()
 
+local windowMovement = require("window_movement")
+windowMovement.setup()
+
 vim.api.nvim_create_autocmd({ 'VimLeavePre' }, {
     group = vim.api.nvim_create_augroup('fuck_shada_temp', { clear = true }),
     pattern = { '*' },
