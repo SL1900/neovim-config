@@ -3,14 +3,20 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 vim.keymap.set("x", "<leader>p", "\"_dP")
 
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+
 if package.config:sub(1, 1) == "\\" then
     vim.keymap.set("n", "<leader>oe", ":!explorer .<CR><CR>", { desc = "[O]pen [E]xplorer in current working directory" })
     vim.keymap.set("n", "<leader>ot", ":!wt -w 0 nt -d .<CR><CR>",
         { desc = "[O]pen Windows [T]erminal in current working directory" })
     vim.keymap.set("n", "<leader>oce", function()
-        local path = vim.api.nvim_buf_get_name(0)
-        local dir = path:sub(1, path:find('\\[^\\]*$'))
-        os.execute("explorer " .. dir)
+        -- local path = vim.api.nvim_buf_get_name(0)
+        -- local dir = path:sub(1, path:find('\\[^\\]*$'))
+        local dir = vim.fn.expand("%:p:h")
+        dir = string.gsub(dir, "/", "\\")
+        print(dir)
+        os.execute("explorer \"" .. dir .. "\"")
     end, { desc = "[O]pen [C]urrent buffer [Explorer]" })
 end
 
