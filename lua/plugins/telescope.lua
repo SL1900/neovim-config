@@ -3,7 +3,35 @@ return {
         "nvim-telescope/telescope.nvim",
         config = function()
             local actions = require("telescope.actions")
+            local action_state = require("telescope.actions.state")
+            local function multi_split(prompt_bufnr, mode)
+                local picker = action_state.get_current_picker(prompt_bufnr)
+                local multi_selection = picker:get_multi_selection()
+
+                -- print(#multi_selection)
+                if #multi_selection > 1 then
+                    actions.close(prompt_bufnr)
+                    for i, entry in ipairs(multi_selection) do
+                        local split_command = mode == "v" and "vsplit" or "split"
+                        local command = (i == 1) and "edit" or split_command
+
+                        local path = entry.path or entry.filename
+                        local row = entry.lnum or 1
+                        local col = entry.col or 1
+
+                        vim.cmd(string.format("%s +%d %s", command, row, path))
+                        vim.api.nvim_win_set_cursor(0, { row, col - 1 })
+                    end
+                else
+                    actions.file_vsplit(prompt_bufnr)
+                end
+            end
             require("telescope").setup({
+                defaults = {
+                    cache_picker = {
+                        num_pickers = 100,
+                    },
+                },
                 pickers = {
                     find_files = {
                         hidden = true,
@@ -30,8 +58,10 @@ return {
                         },
                         mappings = {
                             i = {
-                                ["<C-q>"] = actions.smart_send_to_loclist + actions.open_loclist
-                            }
+                                ["<C-q>"] = actions.smart_send_to_loclist + actions.open_loclist,
+                                ["<C-v>"] = function (bufnr) multi_split(bufnr, "v") end,
+                                ["<C-s>"] = function (bufnr) multi_split(bufnr, "s") end,
+                            },
                         },
                     },
                     current_buffer_fuzzy_find = {
