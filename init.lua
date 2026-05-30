@@ -148,7 +148,7 @@ vim.diagnostic.config({
 local highlight = require("highlight")
 highlight.setup()
 
-local quickCommand = require("quick-command")
+local quickCommand = require("quick-command/quick-command")
 quickCommand.setup()
 
 vim.api.nvim_create_autocmd({ 'VimLeavePre' }, {
