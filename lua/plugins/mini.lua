@@ -33,10 +33,20 @@ return {
         vim.keymap.set("n", "<leader>os", function ()
             local sessions = require("mini.sessions").detected
             local list = {}
-            for k,_ in pairs(sessions) do list[#list + 1] = k end
+            for _, session_details in pairs(sessions) do
+                list[#list+1] = session_details
+            end
+            table.sort(list, function (a, b)
+                return a.modify_time > b.modify_time
+            end)
 
-            vim.ui.select(list, { prompt = "Select session to open" }, function (choice)
-                if choice and choice ~= "" then require("mini.sessions").read(choice)
+            vim.ui.select(list, {
+                prompt = "Select session to open",
+                format_item = function (item)
+                    return string.format("%-40s | %s", item.name, os.date("%Y-%m-%d %H:%M:%S", item.modify_time))
+                end
+            }, function (choice)
+                if choice and choice ~= "" then require("mini.sessions").read(choice.name)
                 else print("Session was not selected")
                 end
             end)
