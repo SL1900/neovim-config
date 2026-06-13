@@ -10,6 +10,7 @@ return {
         require("themery").setup({
             themes = themes,
             livePreview = true,
+            themeConfigFile = "c:\\v:null",
         })
     end,
 }
