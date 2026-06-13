@@ -13,7 +13,7 @@ return {
                 "clang",
                 "g++",
             }
-            require("nvim-treesitter.configs").setup({
+            require("nvim-treesitter.config").setup({
                 highlight = { enable = true },
                 ensure_installed = {
                     "c",
