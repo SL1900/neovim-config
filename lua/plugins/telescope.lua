@@ -26,6 +26,21 @@ return {
                     actions.file_vsplit(prompt_bufnr)
                 end
             end
+            local function toggle_find_files_no_ignore(prompt_bufnr)
+                local current_picker = action_state.get_current_picker(prompt_bufnr)
+                local current_line = action_state.get_current_line()
+
+                find_files_is_no_ignore = vim.F.if_nil(find_files_is_no_ignore, false)
+                find_files_is_no_ignore = not find_files_is_no_ignore
+                actions.close(prompt_bufnr)
+
+                require("telescope.builtin").find_files({
+                    no_ignore = find_files_is_no_ignore,
+                    hidden = true,
+                    default_text = current_line,
+                    prompt_title = "Find files" .. (find_files_is_no_ignore and " <ALL>" or "")
+                })
+            end
             require("telescope").setup({
                 defaults = {
                     cache_picker = {
@@ -36,6 +51,14 @@ return {
                     find_files = {
                         hidden = true,
                         sorter = require("telescope.sorters").get_fuzzy_file(),
+                        mappings = {
+                            i = {
+                                ["<C-h>"] = toggle_find_files_no_ignore,
+                            },
+                            n = {
+                                ["<C-h>"] = toggle_find_files_no_ignore,
+                            },
+                        }
                     },
                     buffers = {
                         layout_strategy = "vertical",
