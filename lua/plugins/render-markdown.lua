@@ -8,12 +8,16 @@ return {
         file_types = { "markdown" },
         render_modes = true,
         checkbox = {
+            unchecked = { icon = '󰄱     ', },
+            checked = { icon = '󰱒 DONE', },
             custom = {
-                todo = { raw = "[-]", rendered = "󰥔 ", highlight = "RenderMarkdownTodo", scope_highlight = nil}
+                todo = { raw = "[-]", rendered = "󰥔 TODO", highlight = "RenderMarkdownTodo" },
+                failed = { raw = "[~]", rendered = " FAIL", highlight = "RenderMarkdownError", scope_highlight = nil },
+                swap = { raw = "[>]", rendered = " SWAP", highlight = "RenderMarkdownWarn", scope_highlight = nil },
             }
         }
     },
-    config = function(opts)
+    config = function(_, opts)
         require("mini.icons").setup()
         require("render-markdown").setup(opts)
     end
