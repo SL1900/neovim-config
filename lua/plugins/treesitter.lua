@@ -1,10 +1,30 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
-        -- build = ":TSUpdate",
-        event = { "BufReadPost", "BufNewFile" },
+        lazy = false,
+        branch = "main",
+        build = ":TSUpdate",
         config = function()
+            -- vim.api.nvim_create_autocmd("BufReadPost", {
+            --     pattern = "*",
+            --     callback = function ()
+            --         vim.treesitter.start()
+            --     end
+            -- })
             -- vim.cmd("TSUpdate")
+            vim.api.nvim_create_autocmd("FileType", {
+                group = vim.api.nvim_create_augroup("LazyTreesitterHighlight", { clear = true, }),
+                pattern = "*",
+                callback = function (args)
+                    local lang = vim.treesitter.language.get_lang(args.match)
+
+                    if not lang or not vim.treesitter.language.add(lang) then
+                        return
+                    end
+
+                    vim.treesitter.start(args.buf)
+                end
+            })
             require("nvim-treesitter.install").compilers = {
                 "zig",
                 "gcc",
@@ -13,27 +33,25 @@ return {
                 "clang",
                 "g++",
             }
-            require("nvim-treesitter.config").setup({
+            require("nvim-treesitter").setup({
                 highlight = { enable = true },
-                ensure_installed = {
-                    "c",
-                    "lua",
-                    "vim",
-                    "vimdoc",
-                    "query",
-                    "markdown",
-                    "markdown_inline",
-                    "typescript",
-                    "javascript",
-                    "css",
-                    "scss",
-                    "html",
-                    "svelte",
-                    "json",
-                    "yaml",
-                    "cpp",
-                    "glsl"
-                }
+            })
+            require("nvim-treesitter").install({
+                "c",
+                "lua",
+                "vim",
+                "vimdoc",
+                "query",
+                "markdown",
+                "markdown_inline",
+                "typescript",
+                "javascript",
+                "css",
+                "html",
+                "svelte",
+                "json",
+                "yaml",
+                "cpp",
             })
         end
     },
