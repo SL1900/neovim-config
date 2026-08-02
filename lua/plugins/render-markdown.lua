@@ -14,6 +14,7 @@ return {
                 todo = { raw = "[-]", rendered = "󰥔 TODO", highlight = "RenderMarkdownTodo" },
                 failed = { raw = "[~]", rendered = " FAIL", highlight = "RenderMarkdownError", scope_highlight = nil },
                 swap = { raw = "[>]", rendered = " SWAP", highlight = "RenderMarkdownWarn", scope_highlight = nil },
+                work = { raw = "[w]", rendered = " WORK", highlight = "RenderMarkdownSign", scope_highlight = nil },
             }
         }
     },
