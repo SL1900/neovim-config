@@ -54,4 +54,6 @@ vim.opt.title=true
 
 vim.o.winborder = "rounded"
 
-vim.opt.shada = "!,'300,<50,s10,h"
+vim.opt.shada = "!,'100,<50,s10,h"
+
+vim.opt.sessionoptions = 'curdir,folds,globals,help,tabpages,terminal,winsize'
