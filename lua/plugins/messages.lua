@@ -1,6 +1,6 @@
 return {
-    {
-        "AckslD/messages.nvim",
-        config = true
-    }
+    -- {
+    --     "AckslD/messages.nvim",
+    --     config = true
+    -- }
 }
